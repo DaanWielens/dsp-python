@@ -10,7 +10,7 @@ Thumbs.db
 
 # Testfiles #
 #############
-.wav
-.pyc
+*.wav
+*.pyc
 
 fftout.png
