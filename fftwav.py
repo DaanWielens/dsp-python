@@ -41,8 +41,8 @@ left = np.lib.pad(left, (0,len_FFT-L), 'constant', constant_values=0)
 # Fourier transform
 Fk = np.fft.fft(left)/len_FFT
 f = np.fft.fftfreq(len_FFT,1.0/Fs)  # 1.0 is necessary to force 'float'
-Y = 2*abs(Fk[1:-len_FFT/2+1])
-f = f[1:-len_FFT/2+1]
+Y = 2*abs(Fk[1:round(-len_FFT/2+1)]) # Round is necessary to force 'int'
+f = f[1:round(-len_FFT/2+1)]
 
 # Plot
 fig, ax = plt.subplots()
@@ -56,5 +56,5 @@ if len(sys.argv) == 4:
     ax.set_xlim((int(sys.argv[2]), int(sys.argv[3])))
 ax.set_xlabel(r'$f (\mathrm{Hz})$',size='x-large')
 ax.set_ylabel(r'$\vert Y(f)\vert$',size='x-large')
-fig.suptitle('Single-sided amplitude spectrum of the input data',size='x-large')
+fig.suptitle('Single-sided amplitude spectrum of file:\n$' + input_file + '$',size='x-large')
 plt.show()
